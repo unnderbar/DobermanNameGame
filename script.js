@@ -1,7 +1,12 @@
+window.onload = function() {
+  generatePerson();
+};
+
 var hej = { name: 'Unn' };
 
 console.log(hej.name);
 
+//Matris med förnamn, efternamn, bild
 var names = [
   { name: 'Adrian', lastname: 'Tomic', image: 'bilder/adrian.jpg' },
   { name: 'Albert', lastname:'Cordenius', image: 'bilder/abbe.jpg'},
@@ -92,16 +97,30 @@ var names = [
 
 console.log(names[0].image);
 
-var i = Math.floor(Math.random() * names.length);
+//använder den här för att
+var i;
 
 //Byter bilden man ska gissa
-document.getElementById('guessWho').src =names[i].image;
+//TODO call function when reload page
+function generatePerson(){
+  i = Math.floor(Math.random() * names.length);
+  document.getElementById('guessWho').src =names[i].image;
+  emptyFields();
+}
+
+var ihaveguessed = true;
 
 function checkAnswer(){
-  var guess = document.getElementById('guessbox').value;
-  if(guess == names[i].name){
-    document.getElementById('facit').innerHTML = "CORRECT";
-  }  else {
-    document.getElementById('facit').innerHTML = "FALSE, this is " + names[i].name;
+    var guess = document.getElementById('guessbox').value;
+    if(guess == names[i].name){
+      document.getElementById('facit').innerHTML = "CORRECT";
+    } else {
+      document.getElementById('facit').innerHTML = "NOPE, this is " + names[i].name;
+    }
+
   }
-}
+
+  function emptyFields(){
+    document.getElementById('guessbox').value ='';
+    document.getElementById('facit').innerHTML='';
+  }
