@@ -54,7 +54,7 @@ var names = [
   { name: 'Kristina' , lastname:'Carlander', image:'bilder/Kristina_Carlander.jpg'},
   { name: 'Lars' , lastname:'Ericsson', image:'bilder/Lars_ericsson.jpg'},
   { name: 'Linnea' , lastname:'Becker', image:'bilder/linnea_becker.jpg'},
-  { name: 'Lisa ' , lastname:'Lindström', image:'bilder/lisa_lindstrom.jpg'},
+  { name: 'Lisa' , lastname:'Lindström', image:'bilder/lisa_lindstrom.jpg'},
   { name: 'Liva' , lastname:'Lager', image:'bilder/liva_lager.jpg'},
   { name: 'Magnus' , lastname:'Bergmark', image:'bilder/Magnus_Bergmark.jpg'},
   { name: 'Magnus' , lastname:'Karlsson', image:'bilder/Magnus_Karlsson.jpg'},
@@ -95,32 +95,92 @@ var names = [
   { name: 'Yvette', lastname:'Englund', image:'bilder/yvette_englund.jpg' }
 ];
 
+var correctGuesses =  [];
+
+
 console.log(names[0].image);
 
 //använder den här för att
 var i;
+//För att räkna ut hur många man klarat i följd
+var currentStreak = 0;
+var highScoreVar = 0;
+var currentPerson;
+var guessBox = document.getElementById('guessbox');
+var checkAnswerButton = document.getElementById('checkAnswerButton');
+var nextButton = document.getElementById('nextPerson');
+
 
 //Byter bilden man ska gissa
-//TODO call function when reload page
 function generatePerson(){
   i = Math.floor(Math.random() * names.length);
   document.getElementById('guessWho').src =names[i].image;
+  currentPerson = names[i];
+  names = names.splice(i, 1);
+  nextButton.style.display='none';
+  checkAnswerButton.style.display='block';
   emptyFields();
 }
 
-var ihaveguessed = true;
-
 function checkAnswer(){
-    var guess = document.getElementById('guessbox').value;
-    if(guess == names[i].name){
+    var guess = guessBox.value;
+    if(guess.toLowerCase() == names[i].name.toLowerCase()){
       document.getElementById('facit').innerHTML = "CORRECT";
+      scored();
     } else {
-      document.getElementById('facit').innerHTML = "NOPE, this is " + names[i].name;
+      document.getElementById('facit').innerHTML = "Try again, this is " + names[i].name+'!';
+      lost();
     }
-
+    checkAnswerButton.style.display='none';
+    nextButton.style.display='block';
   }
 
   function emptyFields(){
-    document.getElementById('guessbox').value ='';
+    guessBox.value ='';
     document.getElementById('facit').innerHTML='';
   }
+
+function displayStreak(){
+  document.getElementById('score').innerHTML='Your current streak is '+currentStreak;
+  if(currentStreak > highScoreVar){
+    highScoreVar = currentStreak;
+    document.getElementById('highScore').innerHTML='High score: '+highScoreVar;
+  }
+}
+
+function haveIWon(){
+  if(names.length == false){
+    document.getElementById('facit').innerHTML='CONGRATULATIONS! You know the name of every single Doberman!';
+  }
+}
+
+//TODO om
+function scored(){
+  console.log('scored');
+  currentStreak= currentStreak+1;
+  displayStreak();
+  correctGuesses.push(currentPerson);
+}
+
+function lost(){
+  console.log('scored');
+  currentStreak=0;
+  displayStreak();
+  names.push(currentPerson);
+
+  while(correctGuesses.length){
+    names.push(correctGuesses.pop());
+  }
+}
+
+function runScript(e){
+  if(e.keyCode==13){
+    checkAnswer();
+  }
+  if(e.keyCode==39){
+    generatePerson();
+    console.log('högerpil');
+  }
+  console.log('typed');
+
+}
