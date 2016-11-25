@@ -2,10 +2,6 @@ window.onload = function() {
   generatePerson();
 };
 
-var hej = { name: 'Unn' };
-
-console.log(hej.name);
-
 //Matris med förnamn, efternamn, bild
 var names = [
   { name: 'Adrian', lastname: 'Tomic', image: 'bilder/adrian.jpg' },
@@ -96,11 +92,6 @@ var names = [
 ];
 
 var correctGuesses =  [];
-
-
-console.log(names[0].image);
-
-//använder den här för att
 var i;
 //För att räkna ut hur många man klarat i följd
 var currentStreak = 0;
@@ -114,21 +105,25 @@ var nextButton = document.getElementById('nextPerson');
 //Byter bilden man ska gissa
 function generatePerson(){
   i = Math.floor(Math.random() * names.length);
-  document.getElementById('guessWho').src =names[i].image;
+  console.log(names.length);
   currentPerson = names[i];
-  names = names.splice(i, 1);
+  console.log('generated person:'+ currentPerson.name);
+  document.getElementById('guessWho').src =currentPerson.image;
+  names.splice(i, 1);
   nextButton.style.display='none';
   checkAnswerButton.style.display='block';
   emptyFields();
 }
 
 function checkAnswer(){
+    console.log('answer is beeing checked...');
+    console.log(currentPerson.name);
     var guess = guessBox.value;
-    if(guess.toLowerCase() == names[i].name.toLowerCase()){
+    if(guess.toLowerCase() == currentPerson.name.toLowerCase()){
       document.getElementById('facit').innerHTML = "CORRECT";
       scored();
     } else {
-      document.getElementById('facit').innerHTML = "Try again, this is " + names[i].name+'!';
+      document.getElementById('facit').innerHTML = "Try again, this is " + currentPerson.name+'!';
       lost();
     }
     checkAnswerButton.style.display='none';
