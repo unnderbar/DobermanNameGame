@@ -96,7 +96,7 @@ var names = [
   { name: 'Lucas' , lastname:'Lima', image:'bilder/lucas.png'},
   { name: 'Lukas' , lastname:'Nässil', image:'bilder/lukas.png'},
   { name: 'Malin' , lastname:'Hankvist', image:'bilder/malin.png'},
-  { name: 'Maria' , lastname:'Norström', image:'bilder/Marianor.png'},
+  { name: 'Maria' , lastname:'Norström', image:'bilder/marianor.png'},
   { name: 'Moa' , lastname:'Corriera', image:'bilder/moa.png'},
   { name: 'Molly' , lastname:'Boid', image:'bilder/molly.png'},
   { name: 'Neil' , lastname:'Woolfries', image:'bilder/neil.png'},
