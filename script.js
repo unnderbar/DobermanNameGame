@@ -63,7 +63,6 @@ var names = [
   { name: 'Sofie' , lastname:'Nilsson', image:'bilder/Sofie_Nilsson.jpg'},
   { name: 'Therese' , lastname:'Björkqvist', image:'bilder/Therese.jpg'},
   { name: 'Tove' , lastname:'Blomgren', image:'bilder/tove_blomgren.jpg'},
-  { name: 'Ulrika' , lastname:'Roth', image:'bilder/ulrika_roth.jpg'},
   { name: 'Unn' , lastname:'Swanström', image:'bilder/unn.png'},
   //additions 2018-08-12
   { name: 'Anne' , lastname:'Hellman Vold', image:'bilder/anne.jpg'},
